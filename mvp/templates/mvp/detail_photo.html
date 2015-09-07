@@ -1,0 +1,34 @@
+<!-- 사진 영역 -->
+<h1>Photo No. {{ photo.pk }}</h1>
+<h2>URL : <a href="{{ photo.image_url }}">{{ photo.image_url }}</a></h2>
+<p>{{ photo.description|linebreaks }}</p>
+
+<!-- 좋아요 영역 -->
+<hr>
+<h3>좋아요</h3>
+
+<ul>
+    {% for like in photo.likes.all %}
+        <li>{{ like.username }}</li>
+    {% endfor %}
+</ul>
+
+<!-- 댓글 영역 -->
+<hr>
+<h3>댓글</h3>
+
+<ul>
+    {% for comment in photo.comment_set.all %}
+        <li>
+            {{ comment.content }}
+            <a href="{% url "mvp.views.delete_comment" comment.pk %}">삭제</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- 버튼 영역 -->
+<hr>
+<a href="{% url "mvp.views.list_photo" %}">사진목록</a>
+<a href="{% url "mvp.views.delete_photo" photo.pk %}">사진삭제</a>
+<a href="{% url "mvp.views.create_comment" photo.pk %}">새댓글</a>
+<a href="{% url "mvp.views.like_photo" photo.pk %}">좋아요</a>

@@ -1,0 +1,11 @@
+<h1>Photo List</h1>
+
+<ol>
+    {% for photo in photos %}
+        <li><a href="{% url "mvp.views.detail_photo" photo.pk %}">{{ photo.image_url }}</a></li>
+    {% endfor %}
+</ol>
+
+<hr>
+
+<a href="{% url "mvp.views.create_photo" %}">새사진</a>
